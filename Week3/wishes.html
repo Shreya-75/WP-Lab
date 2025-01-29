@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Greeting & Clock</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e6e6fa, #d8bfd8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #4b0082;
+        }
+        .container {
+            background: rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        #clock {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #9370db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #7b68ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌈 Personalized Greeting</h1>
+        <div id="clock">00:00:00</div>
+        <button onclick="wishUser()">Get Greeting</button>
+    </div>
+
+    <script>
+        function wishUser() {
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = '';
+
+            if (hour < 12) {
+                greeting = "Good Morning! 🌅 Start your day with positivity!";
+            } else if (hour < 16) {
+                greeting = "Good Afternoon! ☀️ Keep up the great work!";
+            } else if (hour < 20) {
+                greeting = "Good Evening! 🌆 Time to relax and unwind!";
+            } else {
+                greeting = "Good Night! 🌙 Sweet dreams ahead!";
+            }
+
+            alert(greeting);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const clockElement = document.getElementById('clock');
+            clockElement.textContent = now.toLocaleTimeString();
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display time immediately
+    </script>
+</body>
+</html>

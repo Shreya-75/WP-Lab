@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFD1DC, #FFC0CB);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .grade-calculator {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+        .subject-input {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            border: 2px solid #FFC0CB;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+        button {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #FF1493;
+            transform: scale(1.05);
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .grade-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .grade-A {
+            background-color: #2ECC71;
+            color: white;
+        }
+        .grade-B {
+            background-color: #3498DB;
+            color: white;
+        }
+        .grade-C {
+            background-color: #F39C12;
+            color: white;
+        }
+        .grade-D {
+            background-color: #E74C3C;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="grade-calculator">
+        <h1>📊 Grade Calculator</h1>
+        <div class="subject-input">
+            <input type="number" id="subject1" placeholder="Subject 1 Marks" min="0" max="100">
+            <input type="number" id="subject2" placeholder="Subject 2 Marks" min="0" max="100">
+            <input type="number" id="subject3" placeholder="Subject 3 Marks" min="0" max="100">
+            <input type="number" id="subject4" placeholder="Subject 4 Marks" min="0" max="100">
+        </div>
+        <button onclick="calculateGrade()">Calculate Grade</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            const subjects = ['subject1', 'subject2', 'subject3', 'subject4'];
+            let totalMarks = 0;
+            let validInputs = true;
+
+            // Validate inputs
+            subjects.forEach(subject => {
+                const markInput = document.getElementById(subject);
+                const mark = parseFloat(markInput.value);
+
+                if (isNaN(mark) || mark < 0 || mark > 100) {
+                    markInput.style.borderColor = 'red';
+                    validInputs = false;
+                } else {
+                    markInput.style.borderColor = '#FFC0CB';
+                    totalMarks += mark;
+                }
+            });
+
+            if (!validInputs) {
+                alert('Please enter valid marks between 0 and 100');
+                return;
+            }
+
+            const average = totalMarks / subjects.length;
+            let grade = '';
+            let gradeClass = '';
+
+            if (average > 90) {
+                grade = 'A 🌟';
+                gradeClass = 'grade-A';
+            } else if (average > 80) {
+                grade = 'B 👍';
+                gradeClass = 'grade-B';
+            } else if (average > 70) {
+                grade = 'C 😐';
+                gradeClass = 'grade-C';
+            } else if (average > 60) {
+                grade = 'D 😕';
+                gradeClass = 'grade-D';
+            } else {
+                grade = 'F 😢';
+                gradeClass = 'grade-D';
+            }
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <p>Average: ${average.toFixed(2)}%</p>
+                <div class="grade-badge ${gradeClass}">Grade: ${grade}</div>
+            `;
+        }
+    </script>
+</body>
+</html>

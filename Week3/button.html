@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shape and Color Selector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 600px;
+        }
+        .color-buttons, .shape-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .color-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+        .shape-btn {
+            padding: 10px 20px;
+            margin: 0 5px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #preview {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shape and Color Selector</h1>
+        
+        <div class="color-buttons">
+            <button class="color-btn" style="background-color: red;" onclick="selectColor('red')"></button>
+            <button class="color-btn" style="background-color: blue;" onclick="selectColor('blue')"></button>
+            <button class="color-btn" style="background-color: green;" onclick="selectColor('green')"></button>
+            <button class="color-btn" style="background-color: purple;" onclick="selectColor('purple')"></button>
+            <button class="color-btn" style="background-color: orange;" onclick="selectColor('orange')"></button>
+        </div>
+
+        <div class="shape-buttons">
+            <button class="shape-btn" onclick="selectShape('circle')">Circle</button>
+            <button class="shape-btn" onclick="selectShape('square')">Square</button>
+            <button class="shape-btn" onclick="selectShape('triangle')">Triangle</button>
+        </div>
+
+        <div id="preview"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let selectedColor = '';
+        let selectedShape = '';
+
+        function selectColor(color) {
+            selectedColor = color;
+            updateResult();
+        }
+
+        function selectShape(shape) {
+            selectedShape = shape;
+            updateResult();
+        }
+
+        function updateResult() {
+            const preview = document.getElementById('preview');
+            const result = document.getElementById('result');
+
+            if (selectedColor && selectedShape) {
+                result.innerHTML = `Selected: ${selectedColor} ${selectedShape}`;
+                
+                // Clear previous preview
+                preview.innerHTML = '';
+                preview.style.backgroundColor = '';
+                preview.style.clipPath = '';
+
+                // Create shape based on selection
+                switch(selectedShape) {
+                    case 'circle':
+                        preview.style.backgroundColor = selectedColor;
+                        preview.style.borderRadius = '50%';
+                        break;
+                    case 'square':
+                        preview.style.backgroundColor = selectedColor;
+                        break;
+                    case 'triangle':
+                        preview.style.width = '0';
+                        preview.style.height = '0';
+                        preview.style.borderLeft = '100px solid transparent';
+                        preview.style.borderRight = '100px solid transparent';
+                        preview.style.borderBottom = `200px solid ${selectedColor}`;
+                        break;
+                }
+            } else {
+                result.innerHTML = 'Please select both color and shape';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Online Quiz</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, #FF6B35, #F7B801);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #2A2A2A;
+}
+#quiz-container {
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    width: 500px;
+}
+#options button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #FF6B35;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#options button:hover {
+    transform: scale(1.05);
+    background-color: #F7B801;
+}
+
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>🧠 Interactive Quiz</h1>
+        <div id="question">Loading Question...</div>
+        <div id="options"></div>
+        <div id="score"></div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "What is the capital of France?",
+                options: ["London", "Berlin", "Paris", "Madrid"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                correctAnswer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            
+            const current = quizQuestions[currentQuestion];
+            questionElement.textContent = current.question;
+            
+            optionsElement.innerHTML = '';
+            current.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
+                score++;
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').innerHTML = 
+                `<h2>🎉 Quiz Completed!</h2>
+                 <p>Your Score: ${score}/${quizQuestions.length}</p>
+                 <button onclick="location.reload()">Restart Quiz</button>`;
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>

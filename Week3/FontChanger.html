@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Font Size Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: Arial, sans-serif;
+        }
+        #fontText {
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .container {
+            background: rgba(255,255,255,0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="fontText">FONT+++</div>
+        <button onclick="startAnimation()">Start Animation</button>
+    </div>
+
+    <script>
+        let fontSize = 10;
+        let increasing = true;
+        let animationInterval;
+
+        function startAnimation() {
+            // Reset variables
+            fontSize = 10;
+            increasing = true;
+            
+            // Clear any existing interval
+            if (animationInterval) {
+                clearInterval(animationInterval);
+            }
+
+            // Start new animation
+            animationInterval = setInterval(animateFontSize, 200);
+        }
+
+        function animateFontSize() {
+            const textElement = document.getElementById('fontText');
+
+            if (increasing) {
+                // Increase font size
+                fontSize += 2;
+                textElement.style.color = 'red';
+                textElement.textContent = 'FONT+++';
+
+                // Check if max size reached
+                if (fontSize >= 40) {
+                    increasing = false;
+                    textElement.style.color = 'blue';
+                    textElement.textContent = 'FONT---';
+                }
+            } else {
+                // Decrease font size
+                fontSize -= 2;
+                textElement.style.color = 'blue';
+
+                // Stop animation when font size reaches minimum
+                if (fontSize <= 5) {
+                    clearInterval(animationInterval);
+                }
+            }
+
+            // Apply font size
+            textElement.style.fontSize = `${fontSize}pt`;
+        }
+    </script>
+</body>
+</html>

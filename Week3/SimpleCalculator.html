@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator 🧮</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #FFD1DC, #FFC0CB);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .calculator {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            border: 5px solid #FF69B4;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            border: 2px solid #FF69B4;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #FF1493;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #FF69B4;
+            font-weight: bold;
+        }
+        .emoji-result {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>🌈 Calculator 🧮</h1>
+        <div class="input-group">
+            <input type="number" id="num1" placeholder="First Number 🔢">
+            <input type="number" id="num2" placeholder="Second Number 🔢">
+        </div>
+        <div class="button-group">
+            <button onclick="calculate('sum')">➕ Sum</button>
+            <button onclick="calculate('difference')">➖ Difference</button>
+            <button onclick="calculate('product')">✖️ Product</button>
+            <button onclick="calculate('quotient')">➗ Quotient</button>
+        </div>
+        <div id="result"></div>
+        <div id="emoji-result" class="emoji-result"></div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            // Get input values
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const resultElement = document.getElementById('result');
+            const emojiResultElement = document.getElementById('emoji-result');
+
+            // Validate inputs
+            if (isNaN(num1) || isNaN(num2)) {
+                resultElement.textContent = "Please enter valid numbers! 🙈";
+                emojiResultElement.textContent = "❌";
+                return;
+            }
+
+            // Perform calculation
+            let result, emoji;
+            switch(operation) {
+                case 'sum':
+                    result = num1 + num2;
+                    emoji = "🌈";
+                    break;
+                case 'difference':
+                    result = num1 - num2;
+                    emoji = "🌟";
+                    break;
+                case 'product':
+                    result = num1 * num2;
+                    emoji = "🍭";
+                    break;
+                case 'quotient':
+                    // Handle division by zero
+                    if (num2 === 0) {
+                        resultElement.textContent = "Cannot divide by zero! 🙊";
+                        emojiResultElement.textContent = "❌";
+                        return;
+                    }
+                    result = num1 / num2;
+                    emoji = "🍦";
+                    break;
+            }
+
+            // Display result
+            resultElement.textContent = `Result: ${result.toFixed(2)}`;
+            emojiResultElement.textContent = emoji;
+        }
+    </script>
+</body>
+</html>
