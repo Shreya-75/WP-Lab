@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tech Product Order System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-title {
+            text-align: center;
+            color: #4a4a4a;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input {
+            transform: scale(1.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="form-title">Tech Product Order</h2>
+        
+        <div class="form-group">
+            <label>Select Brand</label>
+            <div class="select-wrapper">
+                <select id="brandSelect">
+                    <option value="">Choose Brand</option>
+                    <option value="HP">HP</option>
+                    <option value="Nokia">Nokia</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="Apple">Apple</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Product Type</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="mobile" name="productType" value="Mobile">
+                    <label for="mobile">Mobile</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="laptop" name="productType" value="Laptop">
+                    <label for="laptop">Laptop</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input 
+                type="number" 
+                id="quantity" 
+                min="1" 
+                placeholder="Enter Quantity"
+            >
+        </div>
+
+        <button 
+            class="btn-submit" 
+            onclick="produceBill()"
+        >
+            Produce Bill
+        </button>
+    </div>
+
+    <script>
+        function produceBill() {
+            const brand = document.getElementById('brandSelect').value;
+            const mobile = document.getElementById('mobile');
+            const laptop = document.getElementById('laptop');
+            const quantity = document.getElementById('quantity').value;
+
+            const prices = {
+                'Mobile': {
+                    'HP': 20000,
+                    'Nokia': 15000,
+                    'Samsung': 25000,
+                    'Motorola': 18000,
+                    'Apple': 50000
+                },
+                'Laptop': {
+                    'HP': 45000,
+                    'Nokia': 35000,
+                    'Samsung': 50000,
+                    'Motorola': 40000,
+                    'Apple': 80000
+                }
+            };
+
+            // Validation
+            if (!brand) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please select a brand!'
+                });
+                return;
+            }
+
+            if (!mobile.checked && !laptop.checked) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please select a product type!'
+                });
+                return;
+            }
+
+            if (!quantity || quantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a valid quantity!'
+                });
+                return;
+            }
+
+            // Calculate total
+            let total = 0;
+            let productType = '';
+            if (mobile.checked) {
+                total = prices['Mobile'][brand] * quantity;
+                productType = 'Mobile';
+            } else if (laptop.checked) {
+                total = prices['Laptop'][brand] * quantity;
+                productType = 'Laptop';
+            }
+
+            // Sweet Alert for Bill
+            Swal.fire({
+                title: 'Bill Details',
+                html: `
+                    <div style="text-align: left;">
+                        <strong>Brand:</strong> ${brand}<br>
+                        <strong>Product:</strong> ${productType}<br>
+                        <strong>Quantity:</strong> ${quantity}<br>
+                        <strong>Total Amount:</strong> ₹${total.toLocaleString()}
+                    </div>
+                `,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+    </script>
+
+    <!-- Sweet Alert Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

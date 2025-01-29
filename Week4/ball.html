@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Centered Bouncing Ball Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            width: 600px;
+            height: 400px;
+            background-color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #ball {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="ball"></div>
+    </div>
+
+    <script>
+        function animate() {
+            const container = document.getElementById('container');
+            const ball = document.getElementById('ball');
+            
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            
+            const ballWidth = ball.offsetWidth;
+            const ballHeight = ball.offsetHeight;
+
+            // Start from center
+            let x = (containerWidth - ballWidth) / 2;
+            let y = (containerHeight - ballHeight) / 2;
+            
+            let dx = 3;  // x-axis speed
+            let dy = 3;  // y-axis speed
+
+            function moveBall() {
+                // Update ball position
+                x += dx;
+                y += dy;
+
+                // Bounce off right and left walls
+                if (x + ballWidth > containerWidth || x < 0) {
+                    dx = -dx;  // Reverse x direction
+                    
+                    // Optional: Add color change on wall hit
+                    ball.style.backgroundColor = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+                }
+
+                // Bounce off top and bottom walls
+                if (y + ballHeight > containerHeight || y < 0) {
+                    dy = -dy;  // Reverse y direction
+                    
+                    // Optional: Add color change on wall hit
+                    ball.style.backgroundColor = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+                }
+
+                // Apply new position
+                ball.style.left = `${x}px`;
+                ball.style.top = `${y}px`;
+
+                // Continue animation
+                requestAnimationFrame(moveBall);
+            }
+
+            // Start the animation
+            moveBall();
+        }
+
+        // Initialize animation when page loads
+        window.onload = animate;
+    </script>
+</body>
+</html>

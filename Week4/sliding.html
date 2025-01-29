@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forest Sliding Text Animation</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .image-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .sliding-text {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: bottom 1s ease-in-out;
+            font-size: 24px;
+        }
+
+        .image-container:hover .sliding-text {
+            bottom: 0;
+        }
+
+        /* Alternative Animation Styles */
+        .slide-from-left {
+            left: -100%;
+            transition: left 1s ease-in-out;
+        }
+
+        .image-container:hover .slide-from-left {
+            left: 0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image-container:hover .fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="sloth.jpg" alt="Forest Sloth">
+        
+        <!-- Bottom Sliding Text -->
+        <div class="sliding-text">
+            Hello from the forests
+        </div>
+
+        <!-- Alternative Animation Styles (Uncomment to test) -->
+        <!-- 
+        <div class="sliding-text slide-from-left">
+            Hello from the forests
+        </div>
+
+        <div class="sliding-text fade-in">
+            Hello from the forests
+        </div>
+        -->
+    </div>
+
+    <!-- Optional JavaScript for Dynamic Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.image-container');
+            const text = document.querySelector('.sliding-text');
+
+            // Optional: Add multiple animation styles
+            const animationStyles = [
+                { 
+                    name: 'Bottom Slide', 
+                    class: 'sliding-text' 
+                },
+                { 
+                    name: 'Left Slide', 
+                    class: 'sliding-text slide-from-left' 
+                },
+                { 
+                    name: 'Fade In', 
+                    class: 'sliding-text fade-in' 
+                }
+            ];
+
+            // Optional: Cycle through animation styles
+            let currentStyleIndex = 0;
+            container.addEventListener('click', () => {
+                currentStyleIndex = (currentStyleIndex + 1) % animationStyles.length;
+                text.className = animationStyles[currentStyleIndex].class;
+            });
+        });
+    </script>
+</body>
+</html>

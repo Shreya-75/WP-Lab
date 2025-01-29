@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday Card Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .design-section, .card-section {
+            flex: 1;
+            padding: 30px;
+            transition: all 0.5s ease;
+        }
+
+        .design-section {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .font-preview {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .birthday-card {
+            width: 400px;
+            height: 600px;
+            border: 10px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-image {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="design-section">
+            <h2>Birthday Card Designer</h2>
+            
+            <div class="input-group">
+                <label>Background Color:</label>
+                <div class="color-options" id="colorOptions">
+                    <!-- Pastel color options dynamically added via JS -->
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Font Family:</label>
+                <select id="fontSelect">
+                    <option value="Arial">Arial</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                    <!-- More font options -->
+                </select>
+                <div class="font-preview">Font Preview</div>
+            </div>
+
+            <div class="input-group">
+                <label>Font Size:</label>
+                <input type="number" id="fontSize" min="12" max="72" value="24">
+            </div>
+
+            <div class="input-group">
+                <label>Border Style:</label>
+                <select id="borderStyle">
+                    <option value="solid">Solid</option>
+                    <option value="dashed">Dashed</option>
+                    <option value="dotted">Dotted</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Card Message:</label>
+                <textarea id="cardMessage" rows="4"></textarea>
+            </div>
+
+            <div class="buttons">
+                <button id="updateBtn">Update Card</button>
+                <button id="createNewBtn">Create New</button>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <div class="birthday-card" id="birthdayCard">
+                <img src="cake.jpeg" class="card-image" alt="Birthday Cake">
+                <div id="cardText"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const pastelColors = [
+                '#FFD1DC', '#87CEEB', '#98FB98', '#E6E6FA', 
+                '#FFFACD', '#F5FFFA', '#FFDAB9 ', '#C8A2C8',
+                '#B0E0E6', '#FF6347'
+            ];
+
+            // Populate color options
+            pastelColors.forEach(color => {
+                $('#colorOptions').append(`
+                    <div class="color-option" 
+                         style="background-color:${color}" 
+                         data-color="${color}">
+                    </div>
+                `);
+            });
+
+            // Color selection
+            $('.color-option').click(function() {
+                const selectedColor = $(this).data('color');
+                $('#birthdayCard').css('background-color', selectedColor);
+            });
+
+            // Font preview and selection
+            $('#fontSelect').change(function() {
+                const selectedFont = $(this).val();
+                $('.font-preview').css('font-family', selectedFont)
+                                   .text(selectedFont);
+            });
+
+            // Update Card
+            $('#updateBtn').click(function() {
+                const fontSize = $('#fontSize').val();
+                const fontFamily = $('#fontSelect').val();
+                const message = $('#cardMessage').val();
+                const borderStyle = $('#borderStyle').val();
+
+                $('#birthdayCard').css({
+                    'font-size': `${fontSize}px`,
+                    'font-family': fontFamily,
+                    'border-style': borderStyle
+                });
+
+                $('#cardText').text(message);
+
+                // Slide animations
+                $('.design-section').animate({left: '-100%'}, 500);
+                $('.card-section').animate({left: '0'}, 500);
+            });
+
+            // Create New
+            $('#createNewBtn').click(function() {
+                $('.design-section').animate({left: '0'}, 500);
+                $('.card-section').animate({left: '100%'}, 500);
+                
+                // Reset form
+                $('#cardMessage').val('');
+                $('#birthdayCard').css('background-color', 'white');
+                $('#cardText').text('');
+            });
+        });
+    </script>
+</body>
+</html>
