@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Blog - Tech & Lifestyle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .blog-carousel {
+            max-height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .blog-post-card {
+            transition: transform 0.3s ease;
+        }
+        .blog-post-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tech Blogger</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="#home">Home</a>
+                <a class="nav-link" href="#blog">Blog</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page with Carousel -->
+    <div class="container mt-4">
+        <div id="blogCarousel" class="carousel slide blog-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="featured-post1.jpg" class="d-block w-100" alt="Featured Post 1">
+                    <div class="carousel-caption">
+                        <h5>Latest Tech Innovations</h5>
+                        <p>Exploring cutting-edge technology trends</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="featured-post2.jpg" class="d-block w-100" alt="Featured Post 2">
+                    <div class="carousel-caption">
+                        <h5>Lifestyle Hacks</h5>
+                        <p>Improving daily life through smart solutions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div class="row mt-4">
+            <div class="col-md-4 mb-3">
+                <div class="card blog-post-card">
+                    <img src="blog-post1.jpg" class="card-img-top" alt="Blog Post 1">
+                    <div class="card-body">
+                        <h5 class="card-title">AI Revolution</h5>
+                        <p class="card-text">How AI is transforming industries</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card blog-post-card">
+                    <img src="blog-post2.jpg" class="card-img-top" alt="Blog Post 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Sustainable Tech</h5>
+                        <p class="card-text">Eco-friendly technological solutions</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card blog-post-card">
+                    <img src="blog-post3.jpg" class="card-img-top" alt="Blog Post 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Digital Wellness</h5>
+                        <p class="card-text">Balancing technology and mental health</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

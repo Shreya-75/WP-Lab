@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazine Cover Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .top-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 50px 0;
+        }
+        .bottom-section {
+            background-color: #ffffff;
+            padding: 30px 0;
+        }
+        .section-card {
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Section -->
+    <div class="container-fluid top-section text-center">
+        <div class="container">
+            <h1 class="display-4 mb-4">Tech Innovations Magazine</h1>
+            
+            <!-- Input Group -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Search Articles" 
+                            aria-label="Search"
+                        >
+                        <button class="btn btn-primary" type="button">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Group -->
+            <div class="btn-group" role="group" aria-label="Magazine Categories">
+                <button type="button" class="btn btn-outline-light">
+                    Technology 
+                    <span class="badge bg-danger">New</span>
+                </button>
+                <button type="button" class="btn btn-outline-light">
+                    Innovation
+                    <span class="badge bg-success">Trending</span>
+                </button>
+                <button type="button" class="btn btn-outline-light">
+                    Startup
+                    <span class="badge bg-warning">Hot</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Section (3 Parts) -->
+    <div class="container bottom-section">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-md-4">
+                <div class="card section-card">
+                    <div class="card-body">
+                        <h5 class="card-title">AI Innovations</h5>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">@</span>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Email Subscription"
+                            >
+                            <button class="btn btn-success" type="button">
+                                Subscribe
+                            </button>
+                        </div>
+                        <div class="btn-group-vertical w-100" role="group">
+                            <button type="button" class="btn btn-outline-primary btn-custom">
+                                Machine Learning 
+                                <span class="badge bg-info">Popular</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-custom">
+                                Deep Learning
+                                <span class="badge bg-warning">Emerging</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Column -->
+            <div class="col-md-4">
+                <div class="card section-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Trends</h5>
+                        <div class="input-group mb-3">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Your Name"
+                            >
+                            <span class="input-group-text">👤</span>
+                        </div>
+                        <div class="btn-group w-100" role="group">
+                            <button type="button" class="btn btn-outline-secondary">
+                                Blockchain 
+                                <span class="badge bg-primary">+10</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary">
+                                Crypto 
+                                <span class="badge bg-danger">+5</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third Column -->
+            <div class="col-md-4">
+                <div class="card section-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Startup Ecosystem</h5>
+                        <div class="input-group mb-3">
+                            <button 
+                                class="btn btn-outline-secondary dropdown-toggle" 
+                                type="button" 
+                                data-bs-toggle="dropdown"
+                            >
+                                Select Category
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Fintech</a></li>
+                                <li><a class="dropdown-item" href="#">EdTech</a></li>
+                                <li><a class="dropdown-item" href="#">HealthTech</a></li>
+                            </ul>
+                            <input type="text" class="form-control" aria-label="Category">
+                        </div>
+                        <div class="btn-group-vertical w-100" role="group">
+                            <button type="button" class="btn btn-outline-success btn-custom">
+                                Funding 
+                                <span class="badge bg-light text-dark">$100M</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-success btn-custom">
+                                Innovations 
+                                <span class="badge bg-light text-dark">+50</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
