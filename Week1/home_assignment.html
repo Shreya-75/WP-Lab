@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conference Registration Form</title>
+</head>
+<body>
+    <center>
+        <h2>Conference Registration Form</h2>
+        <form action="registration_result.html" method="post">
+            <!-- Participant Details -->
+            <table>
+                <tr>
+                    <td>Full Name *</td>
+                    <td>
+                        <input 
+                            type="text" 
+                            name="fullName" 
+                            placeholder="Enter your full name" 
+                            required
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email *</td>
+                    <td>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="example@domain.com" 
+                            required
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Number *</td>
+                    <td>
+                        <input 
+                            type="tel" 
+                            name="phone" 
+                            placeholder="10-digit phone number" 
+                            pattern="[0-9]{10}" 
+                            required
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Age *</td>
+                    <td>
+                        <input 
+                            type="number" 
+                            name="age" 
+                            min="18" 
+                            max="60" 
+                            required
+                        >
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Event Preferences -->
+            <h3>Select Events (Up to 2)</h3>
+            <select name="events" multiple required>
+                <option value="coding">Coding Contest</option>
+                <option value="hackathon">Hackathon</option>
+                <option value="paper">Paper Presentation</option>
+                <option value="robotics">Robotics Challenge</option>
+                <option value="keynote">Keynote Session</option>
+            </select>
+            <br>
+            <small>Hold Ctrl (Windows) or Command (Mac) to select multiple options</small>
+
+            <!-- Accommodation -->
+            <h3>Accommodation Type *</h3>
+            <input type="radio" name="accommodation" value="hostel" required> Hostel
+            <input type="radio" name="accommodation" value="hotel"> Hotel
+            <input type="radio" name="accommodation" value="none"> None
+
+            <!-- Dietary Preferences -->
+            <h3>Dietary Preferences</h3>
+            <input type="checkbox" name="diet" value="vegetarian"> Vegetarian
+            <input type="checkbox" name="diet" value="nonVeg"> Non-Vegetarian
+            <input type="checkbox" name="diet" value="vegan"> Vegan
+            <input type="checkbox" name="diet" value="other" onclick="toggleOtherDiet()"> Other
+            <br>
+            <input 
+                type="text" 
+                name="otherDietDetails" 
+                placeholder="Specify other dietary preferences" 
+                disabled 
+                id="otherDietInput"
+            >
+
+            <!-- Additional Info -->
+            <h3>Upload Documents</h3>
+            <input 
+                type="file" 
+                name="studentId" 
+                accept=".pdf" 
+                max-size="5120000"
+            >
+
+            <h3>Comments/Requests</h3>
+            <textarea 
+                name="comments" 
+                rows="4" 
+                cols="50" 
+                maxlength="300"
+            ></textarea>
+
+            <!-- Consent -->
+            <br>
+            <input type="checkbox" name="consent" required> 
+            I agree to the terms and conditions *
+
+            <!-- Submission Buttons -->
+            <br><br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
+    </center>
+
+    <script>
+        function toggleOtherDiet() {
+            const otherCheckbox = document.querySelector('input[value="other"]');
+            const otherDietInput = document.getElementById('otherDietInput');
+            otherDietInput.disabled = !otherCheckbox.checked;
+        }
+    </script>
+</body>
+</html>
