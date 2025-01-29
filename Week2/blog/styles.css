@@ -1,0 +1,20 @@
+body {
+    background-color: #f4f6f9;
+}
+
+.carousel-item img {
+    filter: brightness(70%);
+}
+
+.carousel-caption {
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
