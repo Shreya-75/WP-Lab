@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Promotion Eligibility</title>
+</head>
+<body>
+    <h2>Check Employee Promotion Eligibility</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  {# Display the form fields #}
+        <button type="submit">Am I Eligible for Promotion</button>
+    </form>
+
+    {% if eligibility is not None %}
+        {% if eligibility %}
+            <p>Eligible for Promotion: YES</p>
+        {% else %}
+            <p>Eligible for Promotion: NO</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
