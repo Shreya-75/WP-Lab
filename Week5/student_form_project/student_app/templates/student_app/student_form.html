@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+</head>
+<body>
+    <h2>Enter Student Details</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if student_data %}
+        <h2>Student Data:</h2>
+        <textarea rows="10" cols="50">{{ student_data }}</textarea>
+        <p>Total Percentage: {{ percentage }}%</p>
+    {% endif %}
+</body>
+</html>
